@@ -2,10 +2,14 @@ import React, { Component } from 'react'
 
 import HeaderInterno from './HeaderInterno'
 import base, { storage } from './base'
+import { Redirect } from 'react-router-dom'
 
 class NovoAnuncio extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            success: false
+        }
 
         this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -28,17 +32,14 @@ class NovoAnuncio extends Component {
                     telefone: this.telefone.value,
                     vendedor: this.vendedor.value,
                     foto: img.metadata.downloadURLs[0],
-                    categoria: this.value.categoria
+                    categoria: this.categoria.value
                 }
                 base.push('anuncios', {
                     data: novoAnuncio
-                }, (err) => {
-                    if (err) {
-
-                    } else {
-
-                    }
                 })
+                    .then((err) => {
+                        this.setState({ success: true })
+                    })
                 console.log(novoAnuncio)
             })
 
@@ -47,6 +48,7 @@ class NovoAnuncio extends Component {
     render() {
         return (
             <div>
+                {this.state.success && <Redirect to='/' />}
                 <div className='container' style={{ paddingTop: '120px' }}>
                     <h1>Novo Anúncio</h1>
                     <HeaderInterno />
@@ -59,7 +61,7 @@ class NovoAnuncio extends Component {
                             <label htmlFor="categorias"> Categorias </label>
                             <select ref={(ref) => this.categoria = ref}>
                                 {
-                                    this.props.categorias.map(cat =>  <option value={cat.url}>{cat.categoria} </option> )
+                                    this.props.categorias.map(cat => <option key={cat.url} value={cat.url}>{cat.categoria} </option>)
                                 }
                             </select>
                         </div>
