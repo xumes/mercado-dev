@@ -3,7 +3,7 @@ const config = {
     authDomain: "mercadodev-258bd.firebaseapp.com",
     databaseURL: "https://mercadodev-258bd.firebaseio.com",
     projectId: "mercadodev-258bd",
-    storageBucket: "",
+    storageBucket: "gs://mercadodev-258bd.appspot.com/",
     messagingSenderId: "226652374294"
   }
 
