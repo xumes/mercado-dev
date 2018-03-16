@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import HeaderInterno from './HeaderInterno'
-import base from './base'
+import base, { storage } from './base'
 
 class NovoAnuncio extends Component {
     constructor(props) {
@@ -13,26 +13,34 @@ class NovoAnuncio extends Component {
     handleSubmit(e) {
         console.log(this.nome)
         console.log(this.nome.value)
+        console.log(this.foto, this.foto.files)
 
-        const novoAnuncio = {
-            nome: this.nome.value,
-            descricao: this.descricao.value,
-            preco: this.preco.value,
-            telefone: this.telefone.value,
-            vendedor: this.vendedor.value,
-            foto: 'http://placehold.it/200x140'
-        }
+        const file = this.foto.files[0]
+        const { name, size } = file
+        const ref = storage.ref(name)
+        ref.put(file)
+            .then(img => {
+                console.log(img.metadata.downloadURLs[0])
+                const novoAnuncio = {
+                    nome: this.nome.value,
+                    descricao: this.descricao.value,
+                    preco: this.preco.value,
+                    telefone: this.telefone.value,
+                    vendedor: this.vendedor.value,
+                    foto: img.metadata.downloadURLs[0]
+                }
+                base.push('anuncios', {
+                    data: novoAnuncio
+                }, (err) => {
+                    if (err) {
 
-        base.push('anuncios', {
-            data: novoAnuncio
-        }, (err) => {
-            if (err) {
+                    } else {
 
-            } else {
+                    }
+                })
+                console.log(novoAnuncio)
+            })
 
-            }
-        })
-        console.log(novoAnuncio)
         e.preventDefault()
     }
     render() {
@@ -49,6 +57,10 @@ class NovoAnuncio extends Component {
                         <div className="form-group">
                             <label htmlFor="descricao"> Descrição </label>
                             <textarea type='text' className='form-control' id='descricao' placeholder='Descrição' ref={(ref) => this.descricao = ref} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="foto"> Foto </label>
+                            <input type='file' className='form-control' id='foto' placeholder='Foto' ref={(ref) => this.foto = ref} />
                         </div>
                         <div className="form-group">
                             <label htmlFor="preco"> Preço </label>

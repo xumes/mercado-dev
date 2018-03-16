@@ -10,7 +10,6 @@ import NovoAnuncio from './NovoAnuncio';
 class App extends Component {
 
   render() {
-    let index = 0
     return (
       <Router>
         <div className="App">

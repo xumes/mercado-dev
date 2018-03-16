@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-
 import AnuncioHome from './AnuncioHome'
 import Categorias from './Categorias'
 import HeaderHome from './HeaderHome'
@@ -31,23 +30,26 @@ class Home extends Component {
     }
 
     render() {
+        let index = 0
         return (
             <div>
             <HeaderHome />
                 <div className="container">
                     <h3>Últimos anúncios</h3>
                     <div className="row">
-                        {this.state.anuncios.map((anuncio, index) => {
-                            return <AnuncioHome key={index} anuncio={anuncio} />
+                        {Object.keys(this.state.anuncios).map(key => {
+                            const anuncio = this.state.anuncios[key]
+                            return <AnuncioHome key={key} anuncio={anuncio} />
                         })}
 
                     </div>
                     <h3>Categorias</h3>
                     {/*JSON.stringify(this.state.categorias)*/}
                     <div className="row">
-                        {this.state.categorias.map((cat, index) => {
+                        {Object.keys(this.state.categorias).map(key => {
+                            const cat = this.state.categorias[key]
                             return [
-                                <Categorias categoria={cat} key={index} />,
+                                <Categorias categoria={cat} key={key} />,
                                 ++index % 4 === 0 && <div key={'c' + index} className="w-100"></div>
                             ]
                         })}
