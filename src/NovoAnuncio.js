@@ -27,7 +27,8 @@ class NovoAnuncio extends Component {
                     preco: this.preco.value,
                     telefone: this.telefone.value,
                     vendedor: this.vendedor.value,
-                    foto: img.metadata.downloadURLs[0]
+                    foto: img.metadata.downloadURLs[0],
+                    categoria: this.value.categoria
                 }
                 base.push('anuncios', {
                     data: novoAnuncio
@@ -53,6 +54,14 @@ class NovoAnuncio extends Component {
                         <div className="form-group">
                             <label htmlFor="nome"> Nome </label>
                             <input type='text' className='form-control' id='nome' placeholder='Nome' ref={(ref) => this.nome = ref} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="categorias"> Categorias </label>
+                            <select ref={(ref) => this.categoria = ref}>
+                                {
+                                    this.props.categorias.map(cat =>  <option value={cat.url}>{cat.categoria} </option> )
+                                }
+                            </select>
                         </div>
                         <div className="form-group">
                             <label htmlFor="descricao"> Descrição </label>

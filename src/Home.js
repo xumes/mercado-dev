@@ -10,14 +10,8 @@ class Home extends Component {
         super(props)
 
         this.state = {
-            categorias: [],
             anuncios: []
         }
-
-        base.bindToState('categorias', {
-            context: this,
-            state: 'categorias'
-        })
 
         base.bindToState('anuncios', {
             context: this,
@@ -46,8 +40,8 @@ class Home extends Component {
                     <h3>Categorias</h3>
                     {/*JSON.stringify(this.state.categorias)*/}
                     <div className="row">
-                        {Object.keys(this.state.categorias).map(key => {
-                            const cat = this.state.categorias[key]
+                        {Object.keys(this.props.categorias).map(key => {
+                            const cat = this.props.categorias[key]
                             return [
                                 <Categorias categoria={cat} key={key} />,
                                 ++index % 4 === 0 && <div key={'c' + index} className="w-100"></div>
