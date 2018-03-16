@@ -1,22 +1,26 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 
-import HeaderHome from './HeaderHome'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+
 import Footer from './Footer'
 import Home from './Home'
+import NovoAnuncio from './NovoAnuncio';
 
 class App extends Component {
 
   render() {
     let index = 0
     return (
-      <div className="App">
-        <HeaderHome />
-        <Home />
-        <Footer />
-      </div>
+      <Router>
+        <div className="App">
+          <Route path='/' exact component={Home} />
+          <Route path='/novo-anuncio' exact component={NovoAnuncio} />
+          <Footer />
+        </div>
+      </Router>
     );
   }
 }
 
-export default App;
+export default App
