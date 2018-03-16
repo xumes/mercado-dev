@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import AnuncioHome from './AnuncioHome'
-import Categorias from './Categorias'
+import ListaCategorias from './ListaCategorias'
 import HeaderHome from './HeaderHome'
 import base from './base'
 
@@ -43,7 +43,7 @@ class Home extends Component {
                         {Object.keys(this.props.categorias).map(key => {
                             const cat = this.props.categorias[key]
                             return [
-                                <Categorias categoria={cat} key={key} />,
+                                <ListaCategorias categoria={cat} key={key} />,
                                 ++index % 4 === 0 && <div key={'c' + index} className="w-100"></div>
                             ]
                         })}

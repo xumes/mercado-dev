@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Categorias = ({categoria}) => {
+const ListaCategorias = ({categoria}) => {
     return (
         <a to={`/anuncios/categoria/`} className="btn btn-secondary h-100 m-2 col-sm">
             <i className={`fa ${categoria.icon} fa-4x`} aria-hidden="true"></i><br />
@@ -9,4 +9,4 @@ const Categorias = ({categoria}) => {
     )
 }
 
-export default Categorias
+export default ListaCategorias
