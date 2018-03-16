@@ -1,19 +1,20 @@
 import React, { Component } from 'react'
 
 import HeaderInterno from './HeaderInterno'
+import base from './base'
 
 class NovoAnuncio extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
 
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
-    handleSubmit() {
+    handleSubmit(e) {
         console.log(this.nome)
         console.log(this.nome.value)
 
-        const novoAnunctio = {
+        const novoAnuncio = {
             nome: this.nome.value,
             descricao: this.descricao.value,
             preco: this.preco.value,
@@ -21,7 +22,18 @@ class NovoAnuncio extends Component {
             vendedor: this.vendedor.value,
             foto: 'http://placehold.it/200x140'
         }
-        console.log(novoAnunctio)
+
+        base.push('anuncios', {
+            data: novoAnuncio
+        }, (err) => {
+            if (err) {
+
+            } else {
+
+            }
+        })
+        console.log(novoAnuncio)
+        e.preventDefault()
     }
     render() {
         return (
