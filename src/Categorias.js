@@ -3,7 +3,7 @@ import { Link, Route, Router, Switch } from 'react-router-dom'
 
 import HeaderInterno from './HeaderInterno'
 import Categoria from './Categoria'
-import Cat from './Cat';
+import Anuncio from './Anuncio';
 
 const Categorias = (props) => {
 
@@ -19,7 +19,7 @@ const Categorias = (props) => {
                                 props.categorias.map(
                                     cat => {
                                         return (
-                                            <li >
+                                            <li key={cat.url}>
                                                 <Link to={`/categorias/${cat.url}`}>{cat.categoria} </Link>
                                             </li>
                                         )
@@ -30,12 +30,8 @@ const Categorias = (props) => {
                     </div>
 
                     <div className="col-lg-8">
-
-                        <Switch>
-                            <Route path='/categorias/:urlCategoria' component={Categoria}/>
-                            <Route component={Cat} />
-                        </Switch>
-
+                            <Route path='/categorias/:urlCategoria' exact component={Categoria}/>
+                            <Route path='/categorias/:urlCategoria/:idAnuncio' render={(props) => <Anuncio {...props} />}/>
                     </div>
 
                 </div>
