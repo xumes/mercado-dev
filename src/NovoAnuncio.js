@@ -45,6 +45,7 @@ class NovoAnuncio extends Component {
 
         e.preventDefault()
     }
+    
     render() {
         return (
             <div>

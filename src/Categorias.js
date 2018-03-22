@@ -1,8 +1,9 @@
 import React from 'react'
-import { Link, Route } from 'react-router-dom'
+import { Link, Route, Router, Switch } from 'react-router-dom'
 
 import HeaderInterno from './HeaderInterno'
 import Categoria from './Categoria'
+import Cat from './Cat';
 
 const Categorias = (props) => {
 
@@ -18,8 +19,8 @@ const Categorias = (props) => {
                                 props.categorias.map(
                                     cat => {
                                         return (
-                                            <li key={cat.url}>
-                                                <Link to={`/categorias/${cat.url}`} >{cat.categoria} </Link>
+                                            <li >
+                                                <Link to={`/categorias/${cat.url}`}>{cat.categoria} </Link>
                                             </li>
                                         )
                                     }
@@ -29,9 +30,14 @@ const Categorias = (props) => {
                     </div>
 
                     <div className="col-lg-8">
-                    <Route path="/categorias/:urlCategoria" component={Categoria} />
-                        
+
+                        <Switch>
+                            <Route path='/categorias/:urlCategoria' component={Categoria}/>
+                            <Route component={Cat} />
+                        </Switch>
+
                     </div>
+
                 </div>
             </div>
         </div>
