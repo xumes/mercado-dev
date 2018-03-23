@@ -6,20 +6,27 @@ class Anuncio extends Component {
         super(props)
 
         this.state = {
-            anuncio : {}
+            anuncio : {},
+            isLoading: true
         }
         const id = this.props.match.params.idAnuncio
         const url = `https://mercadodev-258bd.firebaseio.com/anuncios/${id}.json`
 
         axios.get(url)
             .then(data => {
-                this.setState({ anuncio: data.data })
+                this.setState({ anuncio: data.data, isLoading: false})
             })
 
     }
 
     render() {
         const {anuncio} = this.state
+
+        //another method
+        if(this.state.isLoading) {
+            return <i className="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+        }
+
         return (
             <div>
                 <h2>{anuncio.nome}</h2>
